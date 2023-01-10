@@ -19,6 +19,8 @@ Web Map (Paint is too hard):
 
 Configure front end stuff
   - display to user if answer is correct or not 
-  - display coordinates
+  - display direction of correct country
   - Cool animations?
-  - 
+ 
+ Communciations between server and clinet
+  -just JSON probs
