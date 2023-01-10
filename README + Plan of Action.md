@@ -8,3 +8,17 @@ Plan Of Action:
   - Use CSS to make it look nice
   - pay google sites to buy a domain 
   - profit?
+
+
+Web Map (Paint is too hard):
+- Configure database 
+  - SQL maybe? or mongo? idk or something even simpler?
+
+- Configure back end stuff 
+  - recieve country from client and then send back whether the country is correct and if not, direction based on locations of correct country and inputed country
+
+Configure front end stuff
+  - display to user if answer is correct or not 
+  - display coordinates
+  - Cool animations?
+  - 
