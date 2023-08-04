@@ -1,10 +1,14 @@
 import './App.css';
-import Header from './components/Header.jsx';
+import GameMenu from './components/BoardLayoutSidebar.jsx';
+import GameMap from './components/BoardLayoutMain.jsx';
 
 function App() {
     return (
         <div className='App'>
-            <Header />
+            <div className='m-6 flex'>
+                <GameMap />
+                <GameMenu />
+            </div>
         </div>
     );
 }

@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+body {
+    background-color: #dbf7e5;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.active-button {
+    background-color: #49814b;
+}
