@@ -10,13 +10,15 @@ const BoardLayoutSidebar = () => {
     };
 
     return (
-        <div className='text-white bg-[#5FA862] w-64 rounded flex flex-col'>
+        <div className='text-white bg-[#5FA862] rounded-xl flex flex-col'>
             <ul className='flex flex-row text-xl'>
                 <li className='flex-1'>
                     <button
                         id='mapButton'
-                        className={`w-full h-full p-2 transition duration-300 ease-in-out ${
-                            activeButton === 'mapButton' ? 'active-button' : ''
+                        className={`w-full h-full px-6 py-2 transition duration-700 ease-in-out ${
+                            activeButton === 'mapButton'
+                                ? 'active-button rounded-xl'
+                                : ''
                         }`}
                         onClick={() => handleButtonClick('mapButton')}
                     >
@@ -26,9 +28,9 @@ const BoardLayoutSidebar = () => {
                 <li className='flex-1'>
                     <button
                         id='guessesButton'
-                        className={`w-full h-full p-2 transition duration-300 ease-in-out ${
+                        className={`w-full h-full px-6 py-2 transition duration-700 ease-in-out ${
                             activeButton === 'guessesButton'
-                                ? 'active-button'
+                                ? 'active-button rounded-xl'
                                 : ''
                         }`}
                         onClick={() => handleButtonClick('guessesButton')}

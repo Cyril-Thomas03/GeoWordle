@@ -4,8 +4,8 @@ import GameMap from './components/BoardLayoutMain.jsx';
 
 function App() {
     return (
-        <div className='App'>
-            <div className='m-6 flex'>
+        <div className='App m-6 flex flex-row'>
+            <div className='m-auto flex gap-6'>
                 <GameMap />
                 <GameMenu />
             </div>
