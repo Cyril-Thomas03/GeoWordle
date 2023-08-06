@@ -2,8 +2,8 @@ import React from 'react';
 import { FaUser } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 import {
-    GoogleMap,
     StreetViewPanorama,
+    GoogleMap,
     LoadScript,
 } from '@react-google-maps/api';
 
@@ -13,22 +13,7 @@ const getDate = () => {
 
 const BoardLayoutMain = () => {
     // TODO: GET LOCATION FROM API OR JS CODE
-    const center = {
-        lat: 20,
-        lng: 10.270052,
-    };
-
-    const containerStyle = {
-        width: '100%',
-        height: '400px',
-    };
-
-    const pov = {
-        heading: 0,
-        pitch: 0,
-    };
-
-    const lib = ['places'];
+    const position = { lat: 37.7749, lng: -122.4194 }; // Example position (San Francisco)
 
     return (
         <div>
@@ -40,20 +25,14 @@ const BoardLayoutMain = () => {
             </div>
 
             <LoadScript
-                googleMapsApiKey='AIzaSyBwAlszaTjlaVEZlga0-FMwRPgWFwMLKjc'
-                libraries={lib}
+                googleMapsApiKey={'AIzaSyBwAlszaTjlaVEZlga0-FMwRPgWFwMLKjc'}
             >
                 <GoogleMap
-                    mapContainerStyle={containerStyle}
-                    center={center}
-                    zoom={10}
+                    mapContainerStyle={{ width: '100%', height: '400px' }}
+                    center={position}
+                    zoom={14}
                 >
-                    <StreetViewPanorama
-                        id='street-view'
-                        mapContainerStyle={containerStyle}
-                        position={center}
-                        visible={true}
-                    />
+                    <StreetViewPanorama position={position} visible />
                 </GoogleMap>
             </LoadScript>
 
