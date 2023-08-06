@@ -4,8 +4,8 @@ import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 const SidebarMap = () => {
     const center = {
-        lat: 0,
-        lng: 0,
+        lat: 15,
+        lng: 17,
     };
 
     const { isLoaded } = useJsApiLoader({
@@ -21,6 +21,8 @@ const SidebarMap = () => {
         map.fitBounds(bounds);
 
         setMap(map);
+
+        // TODO: NOT LOADING IN RIGHT SPOT?
     }, []);
 
     const onUnmount = React.useCallback(function callback(map) {
