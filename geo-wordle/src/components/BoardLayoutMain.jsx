@@ -4,7 +4,6 @@ import { IconContext } from 'react-icons';
 import {
     StreetViewPanorama,
     GoogleMap,
-    LoadScript,
 } from '@react-google-maps/api';
 
 const getDate = () => {
@@ -23,19 +22,13 @@ const BoardLayoutMain = () => {
                 </IconContext.Provider>
                 <p>UserName (500)</p>
             </div>
-
-            <LoadScript
-                googleMapsApiKey={'AIzaSyBwAlszaTjlaVEZlga0-FMwRPgWFwMLKjc'}
+            <GoogleMap
+                mapContainerStyle={{ width: '100%', height: '400px' }}
+                center={position}
+                zoom={14}
             >
-                <GoogleMap
-                    mapContainerStyle={{ width: '100%', height: '400px' }}
-                    center={position}
-                    zoom={14}
-                >
-                    <StreetViewPanorama position={position} visible />
-                </GoogleMap>
-            </LoadScript>
-
+                <StreetViewPanorama position={position} visible />
+            </GoogleMap>
             <p>Location for {getDate()}</p>
         </div>
     );
