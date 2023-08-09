@@ -10,7 +10,7 @@ const BoardLayoutSidebar = () => {
     };
 
     return (
-        <div className='text-white bg-[#5FA862] rounded-xl flex flex-col'>
+        <div className='w-96 m-auto mt-12 md:w-80 text-white bg-[#5FA862] rounded-xl flex flex-col'>
             <ul className='flex flex-row text-xl'>
                 <li className='flex-1'>
                     <button
@@ -39,8 +39,13 @@ const BoardLayoutSidebar = () => {
                     </button>
                 </li>
             </ul>
-
-            {activeButton === 'mapButton' ? <SidebarMap /> : <SidebarGuesses />}
+            <div className='flex flex-1'>
+                {activeButton === 'mapButton' ? (
+                    <SidebarMap />
+                ) : (
+                    <SidebarGuesses />
+                )}
+            </div>
         </div>
     );
 };
