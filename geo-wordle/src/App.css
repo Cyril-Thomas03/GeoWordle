@@ -8,3 +8,14 @@ body {
 .active-button {
     background-color: #49814b;
 }
+
+.main-map {
+    width: 100%;
+    height: 80%;
+}
+
+@media screen and (max-width: 768px) {
+    .main-map {
+        height: 500px;
+    }
+}
