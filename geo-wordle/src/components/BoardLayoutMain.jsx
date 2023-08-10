@@ -7,10 +7,7 @@ const getDate = () => {
     return new Date().toLocaleDateString();
 };
 
-const BoardLayoutMain = () => {
-    // TODO: GET LOCATION FROM API OR JS CODE
-    const position = { lat: 37.7749, lng: -122.4194 }; // Example position (San Francisco)
-
+const BoardLayoutMain = ({ position }) => {
     return (
         <div className='md:w-4/6 m-8 md:my-6 md:mx-0'>
             <div className='text-3xl flex gap-3'>
@@ -21,16 +18,22 @@ const BoardLayoutMain = () => {
             </div>
 
             <div className='main-map w-full '>
-                <GoogleMap
-                    mapContainerStyle={{ width: '100%', height: '100%' }}
-                    center={position}
-                    zoom={14}
-                >
-                    <StreetViewPanorama position={position} visible />
-                </GoogleMap>
+                {position.lat || position.lng ? (
+                    <GoogleMap
+                        mapContainerStyle={{ width: '100%', height: '100%' }}
+                        center={position}
+                        zoom={14}
+                    >
+                        <StreetViewPanorama position={position} visible />
+                    </GoogleMap>
+                ) : (
+                    <div className='loading-spinner-container'>
+                        <div className='loading-spinner'></div>
+                    </div>
+                )}
             </div>
 
-            <p>Location for {getDate()}</p>
+            <p className='mt-2 text-lg'>Location for {getDate()}</p>
         </div>
     );
 };

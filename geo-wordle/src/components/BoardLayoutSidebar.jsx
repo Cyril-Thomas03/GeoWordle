@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SidebarMap from './SidebarMap';
 import SidebarGuesses from './SidebarGuesses';
 
-const BoardLayoutSidebar = () => {
+const BoardLayoutSidebar = ({ correct_answer }) => {
     const [activeButton, setActiveButton] = useState('mapButton');
 
     const handleButtonClick = (buttonId) => {
@@ -10,7 +10,7 @@ const BoardLayoutSidebar = () => {
     };
 
     return (
-        <div className='w-96 m-auto mt-12 md:w-80 text-white bg-[#5FA862] rounded-xl flex flex-col'>
+        <div className='w-96 shadow-xl m-auto mt-14 mx-2 md:w-80 text-white bg-[#5FA862] rounded-xl flex flex-col'>
             <ul className='flex flex-row text-xl'>
                 <li className='flex-1'>
                     <button
@@ -41,7 +41,7 @@ const BoardLayoutSidebar = () => {
             </ul>
             <div className='flex flex-1'>
                 {activeButton === 'mapButton' ? (
-                    <SidebarMap />
+                    <SidebarMap correct_answer={correct_answer} />
                 ) : (
                     <SidebarGuesses />
                 )}
