@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { FaCheck } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 import { GoogleMap, Marker } from '@react-google-maps/api';
+
+const MemoizedMarker = memo(Marker);
+const initialCenter = { lat: 15, lng: 17 };
 
 const SidebarMap = ({ correct_answer }) => {
 
@@ -62,15 +65,16 @@ const SidebarMap = ({ correct_answer }) => {
             <div className='p-3 h-96'>
                 <GoogleMap
                     mapContainerStyle = {{ width: '100%', height: '100%' }}
-                    center = {{ lat: 15, lng: 15 }}
+                    center = { initialCenter }
                     zoom = { 1 }
                     options = { mapOptions }
                     onClick = { onMapClick }
                 >
-                    {markers.map((marker) => (
-                        <Marker
-                            position = {{ lat: marker.lat, lng: marker.lng  }}
-                        ></Marker>
+                    {markers.map((marker, index) => (
+                        <MemoizedMarker
+                            key = { index }
+                            position = {{ lat: marker.lat, lng: marker.lng }}
+                        />
                     ))}
                 </GoogleMap>
             </div>
