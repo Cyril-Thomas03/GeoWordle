@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
-import { GoogleMap } from '@react-google-maps/api';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 
 const SidebarMap = ({ correct_answer }) => {
+
+    const [markers, setMarkers] = useState([]);
+    const mapOptions = {
+        draggableCursor: "crosshair",
+        gestureHandling: "greedy",
+        streetViewControl: false,
+        fullscreenControl: false,
+        disableDefaultUI: true,
+        clickableIcons: false,
+    }
+    const onMapClick = (e) => {
+        setMarkers([
+            {
+                lat: e.latLng.lat(),
+                lng: e.latLng.lng(),
+            },
+        ]);
+    }
+
     let user_answer = { lat: 0, lng: 0 }; // TODO: GET THE USER MARKER LOCATION
 
     // https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
@@ -42,17 +61,17 @@ const SidebarMap = ({ correct_answer }) => {
 
             <div className='p-3 h-96'>
                 <GoogleMap
-                    mapContainerStyle={{
-                        width: '100%',
-                        height: '100%',
-                    }}
-                    center={{
-                        lat: 15,
-                        lng: 15,
-                    }}
-                    zoom={1}
+                    mapContainerStyle = {{ width: '100%', height: '100%' }}
+                    center = {{ lat: 15, lng: 15 }}
+                    zoom = { 1 }
+                    options = { mapOptions }
+                    onClick = { onMapClick }
                 >
-                    {/* TODO: ADD MARKERS*/}
+                    {markers.map((marker) => (
+                        <Marker
+                            position = {{ lat: marker.lat, lng: marker.lng  }}
+                        ></Marker>
+                    ))}
                 </GoogleMap>
             </div>
 
