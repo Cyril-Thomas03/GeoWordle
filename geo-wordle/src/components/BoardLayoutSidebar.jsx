@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import SidebarMap from './SidebarMap';
 import SidebarGuesses from './SidebarGuesses';
 
-const BoardLayoutSidebar = ({ correct_answer }) => {
+const BoardLayoutSidebar = ({
+    correct_answer,
+    userGuesses,
+    setUserGuesses,
+}) => {
     const [activeButton, setActiveButton] = useState('mapButton');
 
     const handleButtonClick = (buttonId) => {
@@ -41,9 +45,13 @@ const BoardLayoutSidebar = ({ correct_answer }) => {
             </ul>
             <div className='flex flex-1'>
                 {activeButton === 'mapButton' ? (
-                    <SidebarMap correct_answer={correct_answer} />
+                    <SidebarMap
+                        correct_answer={correct_answer}
+                        userGuesses={userGuesses}
+                        setUserGuesses={setUserGuesses}
+                    />
                 ) : (
-                    <SidebarGuesses />
+                    <SidebarGuesses userGuesses={userGuesses} />
                 )}
             </div>
         </div>

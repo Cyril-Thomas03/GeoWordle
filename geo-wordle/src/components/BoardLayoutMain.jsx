@@ -8,7 +8,6 @@ const getDate = () => {
 };
 
 const BoardLayoutMain = ({ position }) => {
-
     const streetViewOptions = {
         //COMPASS
         panControl: false,
@@ -29,7 +28,7 @@ const BoardLayoutMain = ({ position }) => {
         motionTrackingControl: true,
         enableCloseButton: false,
         visible: true,
-    }
+    };
 
     return (
         <div className='md:w-4/6 m-8 md:my-6 md:mx-0'>
@@ -47,10 +46,10 @@ const BoardLayoutMain = ({ position }) => {
                         center={position}
                         zoom={14}
                     >
-                        <StreetViewPanorama 
-                            position = { position } 
-                            visible = { true }
-                            options = { streetViewOptions }
+                        <StreetViewPanorama
+                            position={position}
+                            visible={true}
+                            options={streetViewOptions}
                         />
                     </GoogleMap>
                 ) : (

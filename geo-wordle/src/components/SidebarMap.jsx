@@ -6,17 +6,19 @@ import { GoogleMap, Marker } from '@react-google-maps/api';
 const MemoizedMarker = memo(Marker);
 const initialCenter = { lat: 15, lng: 17 };
 
-const SidebarMap = ({ correct_answer }) => {
-
+const SidebarMap = ({ correct_answer, userGuesses, setUserGuesses }) => {
     const [markers, setMarkers] = useState([]);
+    const [userMessage, setUserMessage] = useState('');
+
     const mapOptions = {
-        draggableCursor: "crosshair",
-        gestureHandling: "greedy",
+        draggableCursor: 'crosshair',
+        gestureHandling: 'greedy',
         streetViewControl: false,
         fullscreenControl: false,
         disableDefaultUI: true,
         clickableIcons: false,
-    }
+    };
+
     const onMapClick = (e) => {
         setMarkers([
             {
@@ -24,9 +26,7 @@ const SidebarMap = ({ correct_answer }) => {
                 lng: e.latLng.lng(),
             },
         ]);
-    }
-
-    let user_answer = { lat: 0, lng: 0 }; // TODO: GET THE USER MARKER LOCATION
+    };
 
     // https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
     function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
@@ -45,14 +45,29 @@ const SidebarMap = ({ correct_answer }) => {
     }
 
     const checkAnswer = () => {
-        // TODO: CALCULATE DISTANCE BETWEEN MARKER AND ANSWER
-        let dist = getDistanceFromLatLonInKm(
+        if (markers.length === 0) {
+            setUserMessage('Please place a marker on the map.');
+            return;
+        }
+
+        setUserMessage(''); // clear user message
+
+        let user_answer = markers[0];
+        setUserGuesses((prevGuesses) => [...prevGuesses, user_answer]);
+
+        let dist_in_km = getDistanceFromLatLonInKm(
             user_answer.lat,
             user_answer.lng,
             correct_answer.lat,
             correct_answer.lng
         );
-        console.log(dist);
+        console.log(dist_in_km);
+
+        console.log('user ans: ' + user_answer.lat + ' ' + user_answer.lng);
+
+        console.log(
+            'correct ans: ' + correct_answer.lat + ' ' + correct_answer.lng
+        );
 
         // TODO: IF CORRECT, DISPLAY CORRECT ANSWER
         // TODO: IF INCORRECT, DISPLAY DIRECTIONAL HINT
@@ -60,20 +75,20 @@ const SidebarMap = ({ correct_answer }) => {
 
     return (
         <div className='flex flex-col flex-1 '>
-            <p className='text-center mt-8 text-lg'>Go more left</p>
+            <p className='text-center mt-8 text-lg'>{userMessage}</p>
 
             <div className='p-3 h-96'>
                 <GoogleMap
-                    mapContainerStyle = {{ width: '100%', height: '100%' }}
-                    center = { initialCenter }
-                    zoom = { 1 }
-                    options = { mapOptions }
-                    onClick = { onMapClick }
+                    mapContainerStyle={{ width: '100%', height: '100%' }}
+                    center={initialCenter}
+                    zoom={1}
+                    options={mapOptions}
+                    onClick={onMapClick}
                 >
                     {markers.map((marker, index) => (
                         <MemoizedMarker
-                            key = { index }
-                            position = {{ lat: marker.lat, lng: marker.lng }}
+                            key={index}
+                            position={{ lat: marker.lat, lng: marker.lng }}
                         />
                     ))}
                 </GoogleMap>
