@@ -1,12 +1,18 @@
 import React from 'react';
+import { fetchMarkerInformation } from '../api/api';
 
-const SidebarGuesses = () => {
+const SidebarGuesses = ({ userGuesses }) => {
+    console.log(userGuesses);
+
     return (
         <div className='flex flex-col flex-1'>
-            <ul className='flex-auto list-decimal text-xl p-8 h-96'>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
+            <ul className='flex-auto list-decimal text-lg p-8 h-96'>
+                {userGuesses.map((guess, index) => (
+                    <li key={index}>
+                        Lat: {guess.lat}, Long: {guess.lng}, Country:
+                        {fetchMarkerInformation()}
+                    </li>
+                ))}
             </ul>
         </div>
     );

@@ -3,40 +3,15 @@ import { useState, useEffect } from 'react';
 import BoardLayoutSidebar from './components/BoardLayoutSidebar.jsx';
 import BoardLayoutMain from './components/BoardLayoutMain.jsx';
 import { LoadScript } from '@react-google-maps/api';
-
-function getRandomInRange(from, to, decimals) {
-    return (Math.random() * (to - from) + from).toFixed(decimals) * 1; // .toFixed() returns string, so ' * 1' is a trick to convert to number
-}
-
-const getLocation = async () => {
-    const lat = getRandomInRange(-85, 85, 8);
-    const lng = getRandomInRange(-180, 180, 8);
-
-    return new Promise((resolve, reject) => {
-        const svService = new window.google.maps.StreetViewService();
-        svService.getPanorama(
-            { location: { lat, lng }, radius: 50 },
-            (data, status) => {
-                if (status === 'OK') {
-                    resolve({ lat, lng });
-                } else {
-                    // If Street View is not available, try another location
-                    console.warn(
-                        'Street View not available at this location. Trying another...'
-                    );
-                    resolve(getLocation());
-                }
-            }
-        );
-    });
-};
+import { fetchRandomLocation } from './api/api'; // Import the backend API functions
 
 function App() {
     const [position, setPosition] = useState({ lat: 0, lng: 0 });
+    const [userGuesses, setUserGuesses] = useState([]);
 
     useEffect(() => {
         const fetchLocation = async () => {
-            const location = { lat: 37.7749, lng: -122.4194 }; //await getLocation();
+            const location = await fetchRandomLocation();
             setPosition(location);
         };
 
@@ -50,7 +25,11 @@ function App() {
                     googleMapsApiKey={'AIzaSyBwAlszaTjlaVEZlga0-FMwRPgWFwMLKjc'}
                 >
                     <BoardLayoutMain position={position} />
-                    <BoardLayoutSidebar correct_answer={position} />
+                    <BoardLayoutSidebar
+                        correct_answer={position}
+                        userGuesses={userGuesses}
+                        setUserGuesses={setUserGuesses}
+                    />
                 </LoadScript>
             </div>
         </div>

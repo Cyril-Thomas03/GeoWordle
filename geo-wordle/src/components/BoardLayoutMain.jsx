@@ -8,6 +8,28 @@ const getDate = () => {
 };
 
 const BoardLayoutMain = ({ position }) => {
+    const streetViewOptions = {
+        //COMPASS
+        panControl: false,
+        //ZOOM BUTTONS
+        zoomControl: false,
+        //ROAD ARROWS
+        linksControl: true,
+        //ZOOM
+        scrollwheel: true,
+        //MOVING
+        clickToGo: true,
+        //SHOW ADDRESS
+        addressControl: false,
+        //ROAD NAMES
+        showRoadLabels: false,
+        //ADDONS
+        fullscreenControl: false,
+        motionTrackingControl: true,
+        enableCloseButton: false,
+        visible: true,
+    };
+
     return (
         <div className='md:w-4/6 m-8 md:my-6 md:mx-0'>
             <div className='text-3xl flex gap-3'>
@@ -24,7 +46,11 @@ const BoardLayoutMain = ({ position }) => {
                         center={position}
                         zoom={14}
                     >
-                        <StreetViewPanorama position={position} visible />
+                        <StreetViewPanorama
+                            position={position}
+                            visible={true}
+                            options={streetViewOptions}
+                        />
                     </GoogleMap>
                 ) : (
                     <div className='loading-spinner-container'>
