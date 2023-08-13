@@ -6,13 +6,24 @@ const SidebarGuesses = ({ userGuesses }) => {
 
     return (
         <div className='flex flex-col flex-1'>
-            <ul className='flex-auto list-decimal text-lg p-8 h-96'>
-                {userGuesses.map((guess, index) => (
-                    <li key={index}>
-                        Lat: {guess.lat}, Long: {guess.lng},
-                    </li>
-                ))}
-            </ul>
+            <div
+                className='scrollable-column-container'
+                style={{
+                    overflowY: 'auto',
+                    maxHeight: '67vh',
+                    height: '67vh',
+                }}
+            >
+                <ul className='scrollable-column-content list-decimal text-lg p-8'>
+                    {userGuesses.map((guess, index) => (
+                        <li key={index} style={{ paddingLeft: '20px' }}>
+                            Lat: {guess.lat}
+                            <br />
+                            Lng: {guess.lng}
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 };
