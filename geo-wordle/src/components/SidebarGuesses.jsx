@@ -9,8 +9,7 @@ const SidebarGuesses = ({ userGuesses }) => {
             <ul className='flex-auto list-decimal text-lg p-8 h-96'>
                 {userGuesses.map((guess, index) => (
                     <li key={index}>
-                        Lat: {guess.lat}, Long: {guess.lng}, Country:
-                        {fetchMarkerInformation()}
+                        Lat: {guess.lat}, Long: {guess.lng},
                     </li>
                 ))}
             </ul>

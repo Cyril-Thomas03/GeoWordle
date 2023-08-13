@@ -5,7 +5,7 @@ export const fetchMarkerInformation = async () => {
 };
 
 export const fetchRandomLocation = async () => {
-    return { lat: 35.66093561769998, lng: 139.6973044705187 }; // Tokyo
+    // return { lat: 35.66093561769998, lng: 139.6973044705187 }; // Tokyo
 
     while (true) {
         try {
@@ -14,13 +14,13 @@ export const fetchRandomLocation = async () => {
                     new URLSearchParams({
                         location: getRandomCoordinatesAsString(),
                         key: 'AIzaSyBwAlszaTjlaVEZlga0-FMwRPgWFwMLKjc',
+                        radius: '3000000',
+                        source: 'outdoor',
                     })
             );
 
             if (response.ok) {
                 const data = await response.json();
-
-                console.log(data);
 
                 if (
                     data.location &&
@@ -46,7 +46,11 @@ export const fetchRandomLocation = async () => {
 };
 
 function getRandomCoordinatesAsString() {
-    const randomLat = (Math.random() * 180 - 90).toFixed(7);
+    const minLatitude = -50; // Lower limit on latitude to avoid polar regions
+    const randomLat = (
+        Math.random() * (90 - minLatitude) +
+        minLatitude
+    ).toFixed(7);
     const randomLng = (Math.random() * 360 - 180).toFixed(7);
     return `${randomLat},${randomLng}`;
 }
