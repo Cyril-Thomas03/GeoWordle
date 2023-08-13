@@ -44,6 +44,35 @@ const SidebarMap = ({ correct_answer, userGuesses, setUserGuesses }) => {
         return d;
     }
 
+    function getHint(guess, answer) {
+        
+        const latDiff = answer.lat - guess.lat;
+        const lngDiff = answer.lng - guess.lng;
+        
+        let horizontalDirection = "";
+        let verticalDirection = "";
+        
+        if (latDiff > 0) {
+            verticalDirection = "north";
+        } else if (latDiff < 0) {
+            verticalDirection = "south";
+        }
+        
+        if (lngDiff > 0) {
+            horizontalDirection = "east";
+        } else if (lngDiff < 0) {
+            horizontalDirection = "west";
+        }
+        
+        if (horizontalDirection && verticalDirection) {
+            return `You need to go ${verticalDirection}-${horizontalDirection}`;
+        } else if (horizontalDirection) {
+            return `You need to go ${horizontalDirection}`;
+        } else if (verticalDirection) {
+            return `You need to go ${verticalDirection}`;
+        } 
+    }
+
     const checkAnswer = () => {
         if (markers.length === 0) {
             setUserMessage('Please place a marker on the map.');
@@ -68,7 +97,13 @@ const SidebarMap = ({ correct_answer, userGuesses, setUserGuesses }) => {
         console.log(
             'correct ans: ' + correct_answer.lat + ' ' + correct_answer.lng
         );
-
+        
+        if (dist_in_km < 200){
+            setUserMessage("correct");
+        } else{
+            setUserMessage(getHint(user_answer ,correct_answer));
+        }
+        
         // TODO: IF CORRECT, DISPLAY CORRECT ANSWER
         // TODO: IF INCORRECT, DISPLAY DIRECTIONAL HINT
     };
