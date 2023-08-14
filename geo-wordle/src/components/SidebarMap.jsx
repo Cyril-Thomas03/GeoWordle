@@ -1,7 +1,7 @@
 import React, { useState, memo } from 'react';
 import { FaCheck } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
-import { GoogleMap, Marker } from '@react-google-maps/api';
+import { GoogleMap, Marker, Polyline } from '@react-google-maps/api';
 
 const MemoizedMarker = memo(Marker);
 const initialCenter = { lat: 15, lng: 17 };
@@ -9,6 +9,7 @@ const initialCenter = { lat: 15, lng: 17 };
 const SidebarMap = ({ correct_answer, userGuesses, setUserGuesses }) => {
     const [markers, setMarkers] = useState([]);
     const [userMessage, setUserMessage] = useState('');
+    const [mapClickable, setMapClickable] = useState(true);
 
     const mapOptions = {
         draggableCursor: 'crosshair',
@@ -17,6 +18,22 @@ const SidebarMap = ({ correct_answer, userGuesses, setUserGuesses }) => {
         fullscreenControl: false,
         disableDefaultUI: true,
         clickableIcons: false,
+    };
+    const polyLineOptions = {
+        geodesic: true,
+        strokeColor: "#FFFFF",
+        strokeOpacity: 0,
+        icons: [
+            {
+                icon: {
+                    path: "M 0,0 0,0",
+                    strokeOpacity: 1,
+                    scale: 3,
+                },
+                offset: "0",
+                repeat: "5px",
+            },
+        ],
     };
 
     const onMapClick = (e) => {
@@ -44,6 +61,35 @@ const SidebarMap = ({ correct_answer, userGuesses, setUserGuesses }) => {
         return d;
     }
 
+    function getHint(guess, answer) {
+        
+        const latDiff = answer.lat - guess.lat;
+        const lngDiff = answer.lng - guess.lng;
+        
+        let horizontalDirection = "";
+        let verticalDirection = "";
+        
+        if (latDiff > 0) {
+            verticalDirection = "north";
+        } else if (latDiff < 0) {
+            verticalDirection = "south";
+        }
+        
+        if (lngDiff > 0) {
+            horizontalDirection = "east";
+        } else if (lngDiff < 0) {
+            horizontalDirection = "west";
+        }
+        
+        if (horizontalDirection && verticalDirection) {
+            return `You need to go ${verticalDirection}-${horizontalDirection}`;
+        } else if (horizontalDirection) {
+            return `You need to go ${horizontalDirection}`;
+        } else if (verticalDirection) {
+            return `You need to go ${verticalDirection}`;
+        } 
+    }
+
     const checkAnswer = () => {
         if (markers.length === 0) {
             setUserMessage('Please place a marker on the map.');
@@ -68,9 +114,15 @@ const SidebarMap = ({ correct_answer, userGuesses, setUserGuesses }) => {
         console.log(
             'correct ans: ' + correct_answer.lat + ' ' + correct_answer.lng
         );
-
-        // TODO: IF CORRECT, DISPLAY CORRECT ANSWER
-        // TODO: IF INCORRECT, DISPLAY DIRECTIONAL HINT
+        
+        if (dist_in_km < 200){
+            setUserMessage("correct");
+            setMarkers([...markers, correct_answer]);
+            setMapClickable(false); // Disable map clicking
+        } else{
+            setUserMessage(getHint(user_answer ,correct_answer));
+        }
+        
     };
 
     return (
@@ -83,7 +135,7 @@ const SidebarMap = ({ correct_answer, userGuesses, setUserGuesses }) => {
                     center={initialCenter}
                     zoom={1}
                     options={mapOptions}
-                    onClick={onMapClick}
+                    onClick={mapClickable ? onMapClick : null}
                 >
                     {markers.map((marker, index) => (
                         <MemoizedMarker
@@ -91,6 +143,10 @@ const SidebarMap = ({ correct_answer, userGuesses, setUserGuesses }) => {
                             position={{ lat: marker.lat, lng: marker.lng }}
                         />
                     ))}
+                    <Polyline
+                        path={[markers[0], markers[1]]}
+                        options={polyLineOptions}
+                    />
                 </GoogleMap>
             </div>
 
