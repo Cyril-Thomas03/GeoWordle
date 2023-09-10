@@ -39,7 +39,7 @@ Open http://localhost:3000 with your browser to see the result.
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="33.33%"><a href="https://github.com/Cyril-Thomas03"><img src="https://avatars.githubusercontent.com/u/56742762?v=4?s=100" width="100px;" alt="Cyril Thomas"/><br /><sub><b>Cyril Thomas</b></sub></a><br /><a href="https://github.com/Cyril-Thomas03/GeoWordle/commits?author=Cyril-Thomas03" title="?"></a></td>
+      <td align="center" valign="top" width="33.33%"><a href="https://github.com/Cyril-Thomas03"><img src="https://avatars.githubusercontent.com/u/56742762?v=4?s=100" width="100px;" alt="Cyril Thomas"/><br /><sub><b>Cyril Thomas</b></sub></a><br /><a href="https://github.com/Cyril-Thomas03/GeoWordle/commits?author=Cyril-Thomas03" title="">💡</a></td>
       <td align="center" valign="top" width="33.33%"><a href="https://github.com/jasonau3"><img src="https://avatars.githubusercontent.com/u/98290381?v=4?s=100" width="100px;" alt="Jason Au"/><br /><sub><b>Jason Au</b></sub></a><br /><a href="https://github.com/Cyril-Thomas03/GeoWordle/commits?author=jasonau3" title="Code">💻</a> <a href="#design-jasonau3" title="Design">🎨</a> </td>
       <td align="center" valign="top" width="33.33%"><a href="https://github.com/SamsonHa2"><img src="https://avatars.githubusercontent.com/u/56209528?v=4?s=100" width="100px;" alt="Samson Ha"/><br /><sub><b>Samson Ha</b></sub></a><br /><a href="https://github.com/Cyril-Thomas03/GeoWordle/commits?author=SamsonHa2" title="Code">💻</a></td>
     </tr>
