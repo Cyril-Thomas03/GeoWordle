@@ -13,7 +13,7 @@ export const fetchRandomLocation = async () => {
                 'https://maps.googleapis.com/maps/api/streetview/metadata?' +
                     new URLSearchParams({
                         location: getRandomCoordinatesAsString(),
-                        key: 'AIzaSyBwAlszaTjlaVEZlga0-FMwRPgWFwMLKjc',
+                        key: 'HIDDEN',
                         radius: '3000000',
                         source: 'outdoor',
                     })
