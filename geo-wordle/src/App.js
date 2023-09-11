@@ -22,7 +22,7 @@ function App() {
         <div className='App flex h-screen justify-center'>
             <div className='w-screen mt-6 flex gap-6 flex-col md:flex-row justify-center '>
                 <LoadScript
-                    googleMapsApiKey={'AIzaSyBwAlszaTjlaVEZlga0-FMwRPgWFwMLKjc'}
+                    googleMapsApiKey={'HIDDEN'}
                 >
                     <BoardLayoutMain position={position} />
                     <BoardLayoutSidebar
